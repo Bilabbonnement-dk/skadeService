@@ -1,5 +1,6 @@
 import json
 import sqlite3
+from datetime import datetime
 
 # Connect to SQLite (creates the database file if it doesn't exist)
 conn = sqlite3.connect('skader.db')
@@ -11,9 +12,10 @@ cursor.execute('''
 CREATE TABLE IF NOT EXISTS Skader (
     RapportID INTEGER PRIMARY KEY AUTOINCREMENT,
     BilID INTEGER,
+    LejeAftaleID INTEGER,
     Beskrivelse TEXT,
     Omkostninger FLOAT,
-    Date DATE
+    Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 ''')
 
