@@ -1,5 +1,6 @@
 import sqlite3
 import os
+import requests
 
 # Path to the database file
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -12,6 +13,9 @@ def get_db_connection():
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     return conn
+
+######### url for Lejeaftale Service #########
+LEJEAFTALE_SERVICE_URL = "http://localhost:5002"
 
 
 ############   Fetch all damages   ##########
@@ -93,6 +97,34 @@ def add_damage_report(data):
 
 
 ############   Get full price for damages   ##########
+
+
+
+############   Get customer id from lejeaftale service   ##########
+
+#Send a POST request to LejeaftaleService to fetch KundeID and BilID for a given LejeaftaleID.
+def get_data_from_agreement_service(lejeaftaleID):
+    
+    # Validate input
+    if not lejeaftaleID or not isinstance(lejeaftaleID, int):
+        return {"error": "Invalid or missing field: 'lejeaftaleID'"}, 400
+
+    try:
+        # Construct the payload
+        payload = {"lejeaftale_id": lejeaftaleID}
+
+        # Send the POST request to LejeaftaleService
+        response = requests.post(f"{LEJEAFTALE_SERVICE_URL}/process-kunde-data", json=payload)
+
+        # Handle response from LejeaftaleService
+        if response.status_code == 200:
+            return response.json(), 200
+        elif response.status_code == 404:
+            return {"error": f"No data found for LejeaftaleID {lejeaftaleID}"}, 404
+        else:
+            return {"error": f"Unexpected response: {response.text}"}, response.status_code
+    except requests.exceptions.RequestException as e:
+        return {"error": f"Failed to connect to LejeaftaleService: {str(e)}"}, 500
 
 
 
