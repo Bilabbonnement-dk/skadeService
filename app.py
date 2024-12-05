@@ -4,6 +4,7 @@ import requests
 from Service.skader import fetch_damage_reports 
 from Service.skader import add_damage_report
 from Service.skader import delete_damage_report
+from Service.skader import get_data_from_agreement_service
 
 app = Flask(__name__)
 
@@ -53,6 +54,15 @@ def send_data():
         return jsonify({"status": "success", "response": response_data}), 200
     except requests.exceptions.RequestException as e:
         return jsonify({"status": "error", "message": str(e)}), 500
+    
+    
+
+# recieve data from Lejeaftale Service
+@app.route('/send-kunde-data/<int:lejeaftaleID>', methods=['GET'])
+def send_request(lejeaftaleID):
+
+    data, status_code = get_data_from_agreement_service(lejeaftaleID)
+    return jsonify(data), status_code
 
 
 
