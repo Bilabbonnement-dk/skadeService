@@ -4,7 +4,9 @@ import requests
 from Service.skader import fetch_damage_reports 
 from Service.skader import add_damage_report
 from Service.skader import delete_damage_report
-from Service.skader import get_data_from_agreement_service
+from Service.connections import get_data_from_agreement_service
+from Service.connections import calculate_pris
+from Service.connections import add_damage_report_send_from_lejeaftaleService
 
 app = Flask(__name__)
 
@@ -55,15 +57,44 @@ def send_data():
     except requests.exceptions.RequestException as e:
         return jsonify({"status": "error", "message": str(e)}), 500
     
-    
+
 
 # recieve data from Lejeaftale Service
 @app.route('/send-kunde-data/<int:lejeaftaleID>', methods=['GET'])
 def send_request(lejeaftaleID):
 
-    data, status_code = get_data_from_agreement_service(lejeaftaleID)
-    return jsonify(data), status_code
+    agreement_data, agreement_status_code = get_data_from_agreement_service(lejeaftaleID)
+    if agreement_status_code != 200:
+        return jsonify(agreement_data), agreement_status_code
 
+    cal_data, cal_status_code = calculate_pris(lejeaftaleID)
+    if cal_status_code != 200:
+        return jsonify(cal_data), agreement_status_code
+    
+    # format the results
+    response = {
+        "Agreement_data": agreement_data,
+        "Sum_of_damages": cal_data
+    }
+
+    return jsonify(response), 200
+
+# Preocess data to Skades Service
+@app.route('/process-damage-data', methods=['POST'])
+def process_kunde_data():
+
+    # Retrieve json payload
+    data = request.json
+
+    # Validate input
+    required_fields = {'BilID', 'LejeAftaleID', 'Beskrivelse', 'Omkostninger'}
+    if not data or not required_fields:
+        return jsonify({"error": "Invalid json data or missing required field"}), 400
+
+    # Call the service function to get data
+    result, status_code = add_damage_report_send_from_lejeaftaleService(data)
+    
+    return jsonify(result), status_code
 
 
 if __name__ == '__main__':
