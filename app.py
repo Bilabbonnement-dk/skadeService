@@ -1,14 +1,52 @@
 from flask import Flask, request, jsonify
 import requests
 
-from Service.skader import fetch_damage_reports 
-from Service.skader import add_damage_report
-from Service.skader import delete_damage_report
-from Service.connections import get_data_from_agreement_service
-from Service.connections import calculate_pris
-from Service.connections import add_damage_report_send_from_lejeaftaleService
+from service.skader import fetch_damage_reports 
+from service.skader import add_damage_report
+from service.skader import delete_damage_report
+from service.connections import get_data_from_agreement_service
+from service.connections import calculate_pris
+from service.connections import add_damage_report_send_from_lejeaftaleService
 
 app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return jsonify({
+        "service": "API Gateway",
+        "available_endpoints": [
+            {
+                "path": "/skadeRapporter",
+                "method": "GET",
+                "description": "Fetch all damage reports"
+            },
+            {
+                "path": "/skadeRapporter",
+                "method": "POST",
+                "description": "Add a new damage report"
+            },
+            {
+                "path": "/skadeRapporter/<int:reportID>",
+                "method": "DELETE",
+                "description": "Delete a damage report by ID"
+            },
+            {
+                "path": "/send-data",
+                "method": "GET",
+                "description": "Send data to another service"
+            },
+            {
+                "path": "/send-kunde-data/<int:lejeaftaleID>",
+                "method": "GET",
+                "description": "Send request to get customer data and calculate damages"
+            },
+            {
+                "path": "/process-damage-data",
+                "method": "POST",
+                "description": "Process damage data from Lejeaftale Service"
+            }
+        ]
+    })
 
 ########### CRUD method GET ############
 
@@ -98,4 +136,4 @@ def process_kunde_data():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001)
+    app.run(host='0.0.0.0', port=5003)
