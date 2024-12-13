@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify
 import requests
+from flasgger import Swagger, swag_from
+from swagger.config import swagger_config
 
 from service.skader import fetch_damage_reports 
 from service.skader import add_damage_report
@@ -9,8 +11,10 @@ from service.connections import calculate_pris
 from service.connections import add_damage_report_send_from_lejeaftaleService
 
 app = Flask(__name__)
+swagger = Swagger(app, config=swagger_config)
 
 @app.route('/')
+@swag_from('swagger/home.yaml')
 def home():
     return jsonify({
         "service": "API Gateway",
@@ -52,12 +56,14 @@ def home():
 
 # Fetch alle skader
 @app.route('/skadeRapporter', methods=['GET'])
+@swag_from('swagger/skadeRapporter.yaml')
 def get_all_reports():
     reports = fetch_damage_reports()
     return jsonify(reports)
 
 # Tilføj en ny skade
 @app.route('/skadeRapporter', methods=['POST'])
+@swag_from('swagger/tilføjSkadeRapporter.yaml')
 def add_new_damages_report():
     data = request.get_json()
     if not data:
@@ -69,6 +75,7 @@ def add_new_damages_report():
 
 # Slet en skade
 @app.route('/skadeRapporter/<int:reportID>', methods=['DELETE'])
+@swag_from('swagger/sletSkadeRapporter.yaml')
 def delete_damages_reports(reportID):
     # Parse JSON body
     data = request.get_data
@@ -83,6 +90,7 @@ def delete_damages_reports(reportID):
 
 # recieve data from Lejeaftale Service
 @app.route('/send-data', methods=['GET'])
+@swag_from('swagger/sendData.yaml')
 def send_data():
     # Data to be sent to Service B
     payload = {"data": "Hello from Skades service!"}
@@ -99,6 +107,7 @@ def send_data():
 
 # recieve data from Lejeaftale Service
 @app.route('/send-kunde-data/<int:lejeaftaleID>', methods=['GET'])
+@swag_from('swagger/sendKundeData.yaml')
 def send_request(lejeaftaleID):
 
     agreement_data, agreement_status_code = get_data_from_agreement_service(lejeaftaleID)
@@ -119,6 +128,7 @@ def send_request(lejeaftaleID):
 
 # Preocess data to Skades Service
 @app.route('/process-damage-data', methods=['POST'])
+@swag_from('swagger/processDamageData.yaml')
 def process_kunde_data():
 
     # Retrieve json payload

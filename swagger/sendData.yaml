@@ -1,0 +1,15 @@
+tags:
+  - Data Service
+summary: Send data to another service
+description: Send data to another service and get a response.
+responses:
+  200:
+    description: Data sent successfully
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Data sent successfully"
+  500:
+    description: Internal server error

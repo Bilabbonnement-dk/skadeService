@@ -1,0 +1,27 @@
+tags:
+  - Damage Data
+summary: Process damage data from Lejeaftale Service
+description: Process damage data received from the Lejeaftale Service.
+parameters:
+  - in: body
+    name: body
+    required: true
+    schema:
+      type: object
+      properties:
+        data:
+          type: string
+          example: "Damage data in JSON format"
+responses:
+  200:
+    description: Damage data processed successfully
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Damage data processed successfully"
+  400:
+    description: Invalid input data
+  500:
+    description: Internal server error
