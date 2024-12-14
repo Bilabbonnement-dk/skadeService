@@ -17,7 +17,7 @@ Applikationen er opdelt i forskellige moduler:
 - `service/skader.py`: Indeholder funktioner til at hente, tilføje og slette skaderapporter.
 - `service/connections.py`: Indeholder funktioner til at hente data fra aftaletjenesten, beregne priser og sende skaderapporter.
 
-## Installation
+## Opsætning og Installation
 Følg disse trin for at installere og køre applikationen:
 
 1. Klon repository:
