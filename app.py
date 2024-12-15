@@ -9,6 +9,7 @@ from service.skader import delete_damage_report
 from service.connections import get_data_from_agreement_service
 from service.connections import calculate_pris
 from service.connections import add_damage_report_send_from_lejeaftaleService
+from Service.connections import send_damage_niveau
 
 app = Flask(__name__)
 swagger = Swagger(app, config=swagger_config)
@@ -143,6 +144,24 @@ def process_kunde_data():
     result, status_code = add_damage_report_send_from_lejeaftaleService(data)
     
     return jsonify(result), status_code
+
+# Send data to Rapport Service
+@app.route('/send-skade-data', defaults={'damage_niveau': None}, methods=['GET'])
+@app.route('/send-skade-data/<int:damage_niveau>', methods=['GET'])
+def send_skade_data(damage_niveau):
+    # Call send_damage_niveau with or without damage_niveau
+    report_data, report_status_code = send_damage_niveau(damage_niveau)
+    
+    # If any error, return it immediately
+    if report_status_code != 200:
+        return jsonify(report_data), report_status_code
+
+    # Return the response data formatted
+    response = { "Damage_data": report_data }
+    return jsonify(response), 200
+
+
+
 
 
 if __name__ == '__main__':

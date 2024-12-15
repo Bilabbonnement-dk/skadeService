@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS Skader (
     LejeAftaleID INTEGER,
     Beskrivelse TEXT,
     Omkostninger FLOAT,
+    SkadeNiveau INTEGER,
     Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 ''')

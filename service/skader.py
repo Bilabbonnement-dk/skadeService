@@ -35,6 +35,7 @@ def fetch_damage_reports():
         "lejeaftale_id": row["LejeAftaleID"],
         "beskrivelse": row["Beskrivelse"],
         "omkostninger": row["Omkostninger"],
+        "skade_niveau": row["SkadeNiveau"],
         "date": row["Date"]
     } 
     for row in rows
@@ -52,9 +53,9 @@ def add_damage_report(data):
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("""
-        INSERT INTO Skader (bil_id, lejeaftale_id, beskrivelse, omkostninger)
-        VALUES (?, ?, ?, ?)
-    """, (data['bil_id'], data['lejeaftale_id'], data['beskrivelse'], data['omkostninger']))
+        INSERT INTO Skader (BilID, LejeaftaleID, Beskrivelse, Omkostninger, SkadeNiveau)
+        VALUES (?, ?, ?, ?, ?)
+    """, (data['BilID'], data['LejeaftaleID'], data['Beskrivelse'], data['Omkostninger'], data['SkadeNiveau']))
     conn.commit()
     conn.close()
 
@@ -63,7 +64,7 @@ def add_damage_report(data):
 
 def add_damage_report(data):
     # Validate input
-    required_fields = ['BilID', 'LejeAftaleID', 'Beskrivelse', 'Omkostninger']
+    required_fields = ['BilID', 'LejeAftaleID', 'Beskrivelse', 'Omkostninger', 'SkadeNiveau']
     if not all(field in data for field in required_fields):
         return {"error": "Missing required fields"}, 400
 
@@ -74,9 +75,9 @@ def add_damage_report(data):
     try:
         # Insert new agreement
         cursor.execute(
-            "INSERT INTO Skader (BilID, LejeAftaleID, Beskrivelse, Omkostninger)"
-            "VALUES (?, ?, ?, ?)", 
-            (data['BilID'], data['LejeAftaleID'], data['Beskrivelse'], data['Omkostninger'])
+            "INSERT INTO Skader (BilID, LejeAftaleID, Beskrivelse, Omkostninger, SkadeNiveau)"
+            "VALUES (?, ?, ?, ?, ?)", 
+            (data['BilID'], data['LejeAftaleID'], data['Beskrivelse'], data['Omkostninger'], data['SkadeNiveau'])
         )
         
         report_id = cursor.lastrowid
