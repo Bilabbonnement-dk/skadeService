@@ -3,12 +3,12 @@ import requests
 from flasgger import Swagger, swag_from
 from swagger.config import swagger_config
 
-from service.skader import fetch_damage_reports 
-from service.skader import add_damage_report
-from service.skader import delete_damage_report
-from service.connections import get_data_from_agreement_service
-from service.connections import calculate_pris
-from service.connections import add_damage_report_send_from_lejeaftaleService
+from Service.skader import fetch_damage_reports 
+from Service.skader import add_damage_report
+from Service.skader import delete_damage_report
+from Service.connections import get_data_from_agreement_service
+from Service.connections import calculate_pris
+from Service.connections import add_damage_report_send_from_lejeaftaleService
 from Service.connections import send_damage_niveau
 
 app = Flask(__name__)
