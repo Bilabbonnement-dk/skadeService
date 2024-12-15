@@ -119,5 +119,58 @@ def add_damage_report_send_from_lejeaftaleService(data):
     
     except sqlite3.Error as e:
         return {"error": f"Database error: {e}"}, 500
+    
+
+import sqlite3
+
+def send_damage_niveau(damage_niveau=None):
+    try:
+        with get_db_connection() as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+
+        # If damage_niveau is None, fetch all damage data
+        if damage_niveau is None:
+            query = "SELECT RapportID, BilID, Omkostninger, Beskrivelse, SkadeNiveau, Date FROM Skader"
+        else:
+            query = "SELECT RapportID, BilID, Omkostninger, Beskrivelse, SkadeNiveau, Date FROM Skader WHERE SkadeNiveau = ?"
+        
+        # Execute the query
+        if damage_niveau is None:
+            cursor.execute(query)
+        else:
+            cursor.execute(query, (damage_niveau,))
+
+        # Fetch the results
+        result = cursor.fetchall()
+
+        # Close the connection
+        conn.close()
+
+        # If results exist, format them into a list of dictionaries
+        if result:
+            report_data = [
+                {
+                    "rapport_id": row["RapportID"],
+                    "bil_id": row["BilID"],
+                    "omkostninger": row["Omkostninger"],
+                    "beskrivelse": row["Beskrivelse"],
+                    "skade_niveau": row["SkadeNiveau"],
+                    "date": row["Date"]
+                }
+                for row in result
+            ]
+            return {"report_data": report_data}, 200
+        else:
+            # If no results are found, return a 404 error
+            if damage_niveau is None:
+                return {"error": "No data found for any SkadeNiveau"}, 404
+            else:
+                return {"error": f"No data found for SkadeNiveau {damage_niveau}"}, 404
+
+    except sqlite3.Error as e:
+        # Return a 500 error if there's a database issue
+        return {"error": f"Database error: {e}"}, 500
+
 
 
