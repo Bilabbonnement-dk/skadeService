@@ -15,7 +15,7 @@ def get_db_connection():
     return conn
 
 ######### url for Lejeaftale Service #########
-LEJEAFTALE_SERVICE_URL = "http://localhost:5002"
+LEJEAFTALE_SERVICE_URL = "http://localhost:5003"
 
 
 
