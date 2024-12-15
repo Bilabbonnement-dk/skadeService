@@ -169,7 +169,7 @@ def send_damage_niveau(damage_niveau=None):
                 return {"error": f"No data found for SkadeNiveau {damage_niveau}"}, 404
 
     except sqlite3.Error as e:
-        # Return a 500 error if there's a database issue
+        # Return a 500 error if there is a database issue
         return {"error": f"Database error: {e}"}, 500
 
 
