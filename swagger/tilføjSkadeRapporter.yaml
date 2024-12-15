@@ -1,5 +1,5 @@
 tags:
-  - Damage Reports
+  - Skades Rapporter
 summary: Add a new damage report
 description: Create a new damage report with the provided data.
 parameters:

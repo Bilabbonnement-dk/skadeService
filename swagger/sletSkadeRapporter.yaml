@@ -1,5 +1,5 @@
 tags:
-  - Damage Reports
+  - Skades Rapporter
 summary: Delete a damage report
 description: Delete a damage report by its ID.
 parameters:

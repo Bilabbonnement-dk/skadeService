@@ -1,5 +1,5 @@
 tags:
-  - Damage Reports
+  - Skades Rapporter
 summary: Fetch all damage reports
 description: Retrieve a list of all damage reports.
 responses:

@@ -1,0 +1,23 @@
+tags:
+  - name: Send Skade Data
+summary: Send damage data to Rapport Service with damage level
+description: Send damage data to Rapport Service with the specified damage level.
+parameters:
+  - in: path
+    name: damage_niveau
+    required: true
+    type: integer
+    description: The level of damage
+responses:
+  200:
+    description: Damage data sent successfully
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Damage data sent successfully"
+  400:
+    description: Invalid damage level
+  500:
+    description: Internal server error

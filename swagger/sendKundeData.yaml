@@ -1,5 +1,5 @@
 tags:
-  - Customer Data
+  - Kunde Data
 summary: Send request to get customer data and calculate damages
 description: Send a request to get customer data and calculate damages based on the provided lejeaftaleID.
 parameters:

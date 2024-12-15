@@ -1,0 +1,15 @@
+tags:
+  - name: Send Skade Data
+summary: Send damage data to Rapport Service
+description: Send damage data to Rapport Service.
+responses:
+  200:
+    description: Damage data sent successfully
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Damage data sent successfully"
+  500:
+    description: Internal server error
