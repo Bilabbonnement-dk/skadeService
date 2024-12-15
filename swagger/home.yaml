@@ -1,0 +1,72 @@
+tags:
+  - name: Root endpoint documentation
+summary: Home
+description: Get API documentation
+responses:
+  200:
+    description: Successful response
+    schema:
+      type: object
+      properties:
+        service:
+          type: string
+          example: "API Gateway"
+        available_endpoints:
+          type: array
+          items:
+            type: object
+            properties:
+              path:
+                type: string
+                example: "/skadeRapporter"
+              method:
+                type: string
+                example: "GET"
+              description:
+                type: string
+                example: "Fetch all damage reports"
+              path:
+                type: string
+                example: "/skadeRapporter"
+              method:
+                type: string
+                example: "POST"
+              description:
+                type: string
+                example: "Add a new damage report"
+              path:
+                type: string
+                example: "/skadeRapporter/<int:reportID>"
+              method:
+                type: string
+                example: "DELETE"
+              description:
+                type: string
+                example: "Delete a damage report by ID"
+              path:
+                type: string
+                example: "/send-data"
+              method:
+                type: string
+                example: "GET"
+              description:
+                type: string
+                example: "Send data to another service"
+              path:
+                type: string
+                example: "/send-kunde-data/<int:lejeaftaleID>"
+              method:
+                type: string
+                example: "GET"
+              description:
+                type: string
+                example: "Send request to get customer data and calculate damages"
+              path:
+                type: string
+                example: "/process-damage-data"
+              method:
+                type: string
+                example: "POST"
+              description:
+                type: string
+                example: "Process damage data from Lejeaftale Service"

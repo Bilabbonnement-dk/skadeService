@@ -1,0 +1,44 @@
+tags:
+  - Damage Reports
+summary: Add a new damage report
+description: Create a new damage report with the provided data.
+parameters:
+  - in: body
+    name: body
+    required: true
+    schema:
+      type: object
+      properties:
+        description:
+          type: string
+          example: "Broken window"
+        date:
+          type: string
+          format: date
+          example: "2023-10-12"
+        status:
+          type: string
+          example: "Pending"
+responses:
+  201:
+    description: Damage report added successfully
+    schema:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        description:
+          type: string
+          example: "Broken window"
+        date:
+          type: string
+          format: date
+          example: "2023-10-12"
+        status:
+          type: string
+          example: "Pending"
+  400:
+    description: Invalid input data
+  500:
+    description: Internal server error

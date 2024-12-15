@@ -1,0 +1,38 @@
+tags:
+  - Customer Data
+summary: Send request to get customer data and calculate damages
+description: Send a request to get customer data and calculate damages based on the provided lejeaftaleID.
+parameters:
+  - in: path
+    name: lejeaftaleID
+    required: true
+    type: integer
+    description: The ID of the rental agreement
+responses:
+  200:
+    description: Customer data and damages calculated successfully
+    schema:
+      type: object
+      properties:
+        customerData:
+          type: object
+          example: {"name": "John Doe", "email": "john.doe@example.com"}
+        damages:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              description:
+                type: string
+                example: "Broken window"
+              cost:
+                type: number
+                format: float
+                example: 150.0
+  404:
+    description: Rental agreement not found
+  500:
+    description: Internal server error

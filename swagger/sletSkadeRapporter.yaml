@@ -1,0 +1,17 @@
+tags:
+  - Damage Reports
+summary: Delete a damage report
+description: Delete a damage report by its ID.
+parameters:
+  - in: path
+    name: reportID
+    required: true
+    type: integer
+    description: The ID of the damage report to delete
+responses:
+  200:
+    description: Damage report deleted successfully
+  404:
+    description: Damage report not found
+  500:
+    description: Internal server error
