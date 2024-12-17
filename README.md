@@ -35,6 +35,7 @@ Følg disse trin for at installere og køre applikationen:
    ```bash
    python3 app.py
 ## Filstruktur
+```bash
 skadeService/
 │
 ├── [app.py](http://_vscodecontentref_/0)
@@ -55,6 +56,7 @@ skadeService/
 ├── database/
 │   ├── import_json.py
 │   ├── skader.db
+```
 
 ## Endpoints
 
