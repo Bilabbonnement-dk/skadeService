@@ -115,7 +115,6 @@ Output:
       "date": "2023-10-12",
       "status": "Pending"
     },
-    ...
   ]
 ```
 ### Tilføj en ny skaderapport
