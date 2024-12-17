@@ -3,6 +3,19 @@
 ## Introduktion
 `skadeService` er en API-gateway, der håndterer skaderapporter og dataudveksling mellem forskellige tjenester. Applikationen er bygget ved hjælp af Flask og dokumenteret med Swagger (Flasgger).
 
+## Indholdsfortegnelse
+
+1. [Funktioner](#funktioner)
+2. [Arkitektur](#arkitektur)
+3. [Forudsætninger](#forudsætninger)
+4. [Opsætning og installation](#opsætning-og-installation)
+5. [Filstruktur](#filstruktur)
+6. [General information](#general-information)
+7. [JWT Autentificering](#JWT-autentificering)
+8. [Endpoints](#endpoints)
+9. [Swagger](#swagger)
+10. [Kontakt](#kontakt)
+
 ## Funktionaliteter
 - Hent alle skaderapporter
 - Tilføj en ny skaderapport
@@ -235,4 +248,20 @@ Fejlbeskeder:
     "error": "Internal server error"
   }
 ```
+Se Swagger-dokumentationen for en komplet liste over endpoints.
+
 Ved at følge denne README-fil kan du nemt installere, køre og forstå skadeService-applikationen. Hvis du har spørgsmål eller problemer, er du velkommen til at oprette en issue i repositoriet.
+
+---
+
+## Swagger Dokumentation
+Swagger-dokumentation er tilgængelig for alle endpoints. Når servicen kører kan man få adgang til Swagger UI på:
+`http://localhost:5001/apidocs`
+
+---
+
+
+### Kontakt
+
+Hvis du har nogen spørgsmål eller oplever problemer, så er du velkommen til at kontakt udviklerteamet: Natazja, Sofie og Viktor.
+
