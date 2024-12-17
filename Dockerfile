@@ -5,7 +5,6 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copy alle filer i den mappe hvor min Dockerfile er til /app mappen i mit image
-COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
