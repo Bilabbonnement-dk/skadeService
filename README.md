@@ -256,7 +256,7 @@ Ved at følge denne README-fil kan du nemt installere, køre og forstå skadeSer
 
 ## Swagger Dokumentation
 Swagger-dokumentation er tilgængelig for alle endpoints. Når servicen kører kan man få adgang til Swagger UI på:
-`http://localhost:5001/apidocs`
+`http://localhost:5002/apidocs`
 
 ---
 
