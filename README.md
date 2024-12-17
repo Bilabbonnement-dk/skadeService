@@ -196,7 +196,6 @@ Output:
         "description": "Broken window",
         "cost": 150.0
       },
-      ...
     ]
   }
 ```
