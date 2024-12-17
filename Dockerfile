@@ -1,8 +1,13 @@
-# Use an official Python runtime as a parent image
+# Base image
 FROM python:3.9-slim
 
-# Set the working directory in the container
-WORKDIR /skadeService
+# Skift til mappen /app (svarer til CD kommandoen)
+WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Copy alle filer i den mappe hvor min Dockerfile er til /app mappen i mit image
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+CMD ["python3", "app.py","gunicorn", "--bind", "0.0.0.0:80", "app:app"]
