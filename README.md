@@ -9,7 +9,6 @@
 
 ---
 
-## Introduktion
 `skadeService` er en API-gateway, der håndterer skaderapporter og dataudveksling mellem forskellige tjenester. Applikationen er bygget ved hjælp af Flask og dokumenteret med Swagger (Flasgger).
 
 ## Indholdsfortegnelse
