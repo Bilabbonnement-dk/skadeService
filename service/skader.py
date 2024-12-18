@@ -17,6 +17,7 @@ def get_db_connection():
 
 
 ############   Fetch all damages   ##########
+
 def fetch_damage_reports():
     # Connect to the database and fetch damage data
     conn = get_db_connection()
@@ -45,10 +46,11 @@ def fetch_damage_reports():
 
 # Fetch and print the filtered damage report data
 damage_report_data = fetch_damage_reports()
+
 #print(guests_data)
 
 
-# Tilføj en ny skade
+# Add a new Skade
 def add_damage_report(data):
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -99,7 +101,7 @@ def add_damage_report(data):
 
 ############   Delete report data   ##########
 
-# Slet en skade
+# Delete Skade
 def delete_damage_report(data):
 
     reportID = data.get('report_id')

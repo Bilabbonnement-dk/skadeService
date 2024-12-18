@@ -65,14 +65,14 @@ def home():
 
 ########### CRUD method GET ############
 
-# Fetch alle skader
+# Fetch All Skader
 @app.route('/skadeRapporter', methods=['GET'])
 @swag_from('swagger/skadeRapporter.yaml')
 def get_all_reports():
     reports = fetch_damage_reports()
     return jsonify(reports)
 
-# Tilføj en ny skade
+# Add New Skade
 @app.route('/skadeRapporter', methods=['POST'])
 @swag_from('swagger/tilføjSkadeRapporter.yaml')
 def add_new_damages_report():
@@ -84,7 +84,7 @@ def add_new_damages_report():
     return jsonify(result), status_code
 
 
-# Slet en skade
+# Delete Skade
 @app.route('/skadeRapporter/<int:reportID>', methods=['DELETE'])
 @swag_from('swagger/sletSkadeRapporter.yaml')
 def delete_damages_reports(reportID):
@@ -99,7 +99,7 @@ def delete_damages_reports(reportID):
     return jsonify(result), status_code
 
 
-# recieve data from Lejeaftale Service
+# Recieve data from Lejeaftale Service
 @app.route('/send-data', methods=['GET'])
 @swag_from('swagger/sendData.yaml')
 def send_data():
@@ -116,7 +116,7 @@ def send_data():
     
 
 
-# recieve data from Lejeaftale Service
+# Recieve data from Lejeaftale Service
 @app.route('/send-kunde-data/<int:lejeaftaleID>', methods=['GET'])
 @swag_from('swagger/sendKundeData.yaml')
 def send_request(lejeaftaleID):
@@ -129,7 +129,7 @@ def send_request(lejeaftaleID):
     if cal_status_code != 200:
         return jsonify(cal_data), agreement_status_code
     
-    # format the results
+    # Format the results
     response = {
         "Agreement_data": agreement_data,
         "Sum_of_damages": cal_data
